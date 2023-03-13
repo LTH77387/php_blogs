@@ -1,0 +1,18 @@
+Connection::make();
+$router->direct('routeName');
+Router::load("routes.php")->direct(trim($_SERVER['REQUEST_URI'],"/")); = Router::load("routes.php")->direct(Request::uri());
+$router=new Router();
+%router->define([
+    ""=>"/controllers/IndexController.php";
+]);
+
+// Trim does not allow the get method data 
+parse_url(trim($_SERVER['REQUEST_URI'],"/"),PHP_URL_PATH);
+
+This is the same as 
+ $data=$_SERVER['REQUEST_URI'];
+        $trim=trim($data,"/");
+        $parse=parse_url($trim,PHP_URL_PATH);
+
+App::bind(key,value);
+App::get(key);
