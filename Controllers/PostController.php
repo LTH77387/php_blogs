@@ -5,7 +5,7 @@ use core\Auth;
 
 class PostController{
     public function store(){
-    view("create","Post");
+    view("create","User","Post");
         
     }
 

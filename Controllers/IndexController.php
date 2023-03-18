@@ -6,7 +6,7 @@ use Models\Model;
 
 class IndexController{
    public function index(){
-    view("index","",[
+    view("index","","",[
        'users'=>User::get()
     ]);
    }

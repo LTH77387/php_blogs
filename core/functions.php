@@ -6,12 +6,21 @@ function dd($data){
     die(var_dump($data));
 }
 // dynamic view function
-function view($fileName,$folderName="",$data=[]){
+function view($fileName,$folderName_1="",$folderName_2="",$data=[]){
     extract($data);
-    if($folderName!==""){
-        return require "views/$folderName/$fileName.view.php";
+    //test the both conditions ture first so that it will not only render the folder_1 return.
+    if($folderName_1!=="" && $folderName_2!==""){
+        return require "views/$folderName_1/$folderName_2/$fileName.view.php";
     }
-    return require "views/$fileName.view.php";
+    
+    if($folderName_1!==""){
+        return require "views/$folderName_1/$fileName.view.php";
+    }
+    
+     if($folderName_1=="" && $folderName_2==""){
+        return require "views/$fileName.view.php";
+    }
+    
 }
 
 function back(){

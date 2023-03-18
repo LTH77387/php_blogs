@@ -17,6 +17,7 @@ class AuthController{
             //]);
         $errors = [];
         $success=[];
+        // if any of the errors occur, the error messages will be pushed in $errors array.
         if($userName==""){
             $errors["nameErr"] = "Name field is required";
         }

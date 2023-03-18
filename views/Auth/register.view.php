@@ -1,4 +1,4 @@
-<?php require "views/partials/header.php" ?>
+<?php require "views/User/partials/header.php" ?>
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-6 mt-5">
@@ -54,4 +54,4 @@
   </div>
 </div>
 
-<?php require "views/partials/footer.php" ?>
+<?php require "views/User/partials/footer.php" ?>
