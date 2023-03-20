@@ -13,7 +13,7 @@
           <a class="nav-link" aria-current="page" href="/register">Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="posts/create">Create a post</a>
+          <a class="nav-link" href="/posts/create">Create a post</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Contact us</a>

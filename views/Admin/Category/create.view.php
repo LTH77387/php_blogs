@@ -9,7 +9,7 @@
         <div class="card-header">
       <a href="/category" class="text-decoration-none text-dark "> <i class="fas fa-arrow-left"></i>Back</a>
             <?php if(isset($_SESSION['success'])) : ?>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $_SESSION['success'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
@@ -22,6 +22,10 @@
             <div class="form-group">
               <label for="userName">Name:</label>
               <input type="text" class="form-control" name="categoryName">
+              <?php if(isset($_SESSION['error'])) : ?>
+                       <small class="text-danger"> <?= $_SESSION['error'] ?></small>
+                <?php unset($_SESSION['error']) ?>
+            <?php endif;?>
             </div>
             <div class="text-center">
               <button class="btn btn-secondary mt-4 float-end">Create</button>
