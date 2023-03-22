@@ -3,17 +3,42 @@
 <div class="container mt-5">
   <div class="row justify-content-center">
     <div class="col-md-8">
+      <!-- success msg -->
     <?php if(isset($_SESSION['success'])) : ?>
-                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $_SESSION['success'] ?>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
                 <?php unset($_SESSION['success']) ?>
     <?php endif;?>
+    <!-- type error -->
+    <?php if(isset($_SESSION['typeError'])) : ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['typeError'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php unset($_SESSION['typeError']) ?>
+    <?php endif;?>
+    <!-- size error -->
+    <?php if(isset($_SESSION['sizeError'])) : ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['sizeError'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php unset($_SESSION['sizeError']) ?>
+    <?php endif;?>
+    <!-- error uploading -->
+    <?php if(isset($_SESSION['errorUploading'])) : ?>
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                        <?= $_SESSION['errorUploading'] ?>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                <?php unset($_SESSION['errorUploading']) ?>
+    <?php endif;?>
       <div class="card">
         <div class="card-header bg-dark text-white">Create Post</div>
         <div class="card-body">
-          <form method="POST" action="/posts/create">
+          <form method="POST" action="/posts/create" enctype="multipart/form-data">
             <div class="mb-3">
               <label for="category" class="form-label">Category</label>
               <select class="form-select" id="category" name="category_id">
@@ -42,6 +67,9 @@
                 <small class="text-danger"><?= $_SESSION['bodyErr'] ?></small>
                 <?php unset($_SESSION['bodyErr']) ?>
               <?php endif; ?>
+            </div>
+            <div class="mb-3">
+              <input type="file" name="image" id="" class="form-control">
             </div>
 
 

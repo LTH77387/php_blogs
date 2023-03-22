@@ -16,3 +16,36 @@ This is the same as
 
 App::bind(key,value);
 App::get(key);
+
+//img uploading
+
+ // $tmpName = $_FILES['postImage']['tmp_name'];
+        // $imgName= $_FILES['postImage']['name'];
+        // $imgErr= $_FILES['postImage']['error'];
+        // if($imgErr!==0){
+        //     return back()->with(["uploadError"=>"Error while uploading image"]);
+        // }
+
+
+
+
+                  // size testing
+                   if($imgErr <= 3145728){
+                       //continue uploading
+                   $updateData['image']=$imgName;
+                  
+                
+                   }else{
+                       //size error
+                       return back()->with(["sizeError"=>"Image Size is too large"]);
+                   }
+                   
+               // if there is no error
+               if($imgErr==0){
+                  
+       
+     
+               }else {
+                   //error in uploading
+                   return back()->with(["errorUploading"=>"There's an error in uploading image"]);
+               }

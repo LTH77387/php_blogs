@@ -25,10 +25,9 @@ class Route{
         if(!array_key_exists($uri, self::$routes[$method])){
             die("404 Not Found");
         }
-        if(isset($_POST['method'])){ //==="PUT"
+        if(isset($_POST['method'])=="PUT"){ //==="PUT"
            $method=$_POST['method']; //put method assigned 
         }
-
         //test hidden id
        if(isset($_POST['id'])){
            self::$id=$_POST['id'];

@@ -31,7 +31,13 @@
               <small class="text-muted" id="post-time-<?= $post->id ?>">
                 <?php
                   $post_created_at = new DateTime($post->created_at);
-                  echo $post_created_at->format('Y-m-d H:i:s'); // output hidden timestamp for JS use
+                  $post_updated_at=new DateTime($post->updated_at);
+                  if($post_updated_at!==$post_created_at){
+                    echo  $post_updated_at->format('Y-m-d H:i:s');
+                  }else {
+                    echo $post_created_at->format('Y-m-d H:i:s'); // output hidden timestamp for JS use
+                  }
+                
                 ?>
               </small>
             </div>
