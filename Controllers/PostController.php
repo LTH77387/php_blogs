@@ -4,17 +4,31 @@ namespace Controllers;
 use App;
 use core\Auth;
 use Models\Post;
+use Models\User;
+use PDOException;
+use Models\Comment;
 use Models\Category;
 
 class PostController{
     public function create(){
-        $categories=Category::get();
-    view("create","User","Post",[
-        "categories"=>$categories
-    ]);
+        // check if the user is logined or not
+        if(Auth::check()){
+            // dd($_SESSION['user_id']);
+            $categories=Category::get();
+            view("create","User","Post",[
+                "categories"=>$categories
+            ]);
+        }else{
+            return redirect("/register");
+        }
+       
         
     }
+    ########## STORE ##########
     public function store(){
+        // Validator::make(request()->all(),[
+            // "name" => "required",
+        // ])->validate();
         $errors=[];
         $title=request('title');
         $body=request('body');
@@ -41,7 +55,7 @@ class PostController{
                     "category_id"=>$category_id
                 ];
         // test whether the image exists or not
-        
+        $imgErr= $_FILES['image']['error'];
 
         //if err !==0 upload image is null
         if($imgErr!==0){
@@ -56,7 +70,6 @@ class PostController{
         }
         if(isset($_FILES['image'])){
             $imgName=uniqid() . '_' . $_FILES['image']['name'];
-            $imgErr= $_FILES['image']['error'];
             $tmpName = $_FILES['image']['tmp_name'];
             $valid_extensions = ['jpg', 'jpeg', 'png'];
             $extension = strtolower(pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION));
@@ -68,7 +81,7 @@ class PostController{
             }
 
         // size testing
-            if($imgErr <= 3145728){
+            if($imgErr <= 3145728){ //3 mb
                 //continue uploading
             $createData['image']=$imgName;
             $target_file='storage/' . $imgName;
@@ -91,17 +104,19 @@ class PostController{
         }
         
     }
+    ########## EDIT ##########
     public function edit($id){
        $post=Post::find($id);
        $category_id=$post->category_id;
        $category=Category::find($category_id);
        $categories=Category::get();
         // $category=Category::find($category_id);
-        view("update","User","Post",[
+      view("update","User","Post",[
             "post"=>$post,
            "categories"=>$categories
         ]);
     }
+    ########## UPDATE ##########
     public function update($id){
         $imgErr= $_FILES['updateImage']['error'];
         // dd($imgErr);//error if null 
@@ -163,7 +178,7 @@ class PostController{
                         unlink($file_path);
                     }
     
-                    try{
+                    try{ //Category::update()
                         Post::update($id,$updateData);
                         return back()->with(["success"=>"Post Updated!"]);
                     }catch(PDOException $err){
@@ -182,8 +197,22 @@ class PostController{
             }
         }
     }
-    
+    ########## SHOW ##########
+    public function show($id){
+        $post=Post::find($id);
+        $categories=Category::get();
+        $comments=Comment::get();
+        $users=User::get();
+        view("show","User","Post",[
+            "post"=>$post,
+            "categories"=>$categories,
+            "comments"=>$comments,
+            "users"=>$users
+        ]);
+    }
+    ########## DELETE ##########
     public function delete($id){
+        // Post::where("posts.id",$id)->delete();
         Post::delete($id);
         return back()->with(["success"=>"Post Deleted!"]);
     }

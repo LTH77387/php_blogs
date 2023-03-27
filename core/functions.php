@@ -36,7 +36,10 @@ function request($name) {
         return $_GET[$name];
     }
 }
-
+function redirect($uri){
+    header("Location: $uri");
+    return new With();
+}
 
 class With {
    

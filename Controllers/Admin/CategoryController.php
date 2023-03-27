@@ -23,7 +23,7 @@ class CategoryController{
                 "category_name"=>$category_name,
             ]);
             return back()->with(["success"=>"Category Created!"]);
-        }catch(PDOException $err){
+        }catch(\PDOException $err){
             echo $err->getMessage();
         }
     }

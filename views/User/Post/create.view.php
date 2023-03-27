@@ -2,7 +2,7 @@
 <!-- Create Post -->
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 mt-5">
       <!-- success msg -->
     <?php if(isset($_SESSION['success'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

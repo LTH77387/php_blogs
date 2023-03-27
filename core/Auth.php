@@ -1,19 +1,14 @@
 <?php
-
 namespace core;
+class Auth{
+    public static function check(){
+        if(isset( $_SESSION['user_id'] )){
+           return $_SESSION['user_id'];
+          }else{
+              return null;
+          }
 
-use Models\Post;
-
-
-
-class Auth {
-    
-//     public static function check($userID="") {
-        
-//         // Check if the user with the given ID exists in the users table
-//         $user = Post::find($userID);
-//        return $user ?  true :  false;
-//     }
+    }
 }
 
 ?>

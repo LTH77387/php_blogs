@@ -1,10 +1,10 @@
 <?php require "views/User/partials/header.php" ?>
 <div class="container mt-5">
   <div class="row">
-    <div class="col-md-8 mx-auto">
-      <h2 class="mb-4">Uploaded Posts</h2>
+    <div class="col-md-6 mx-auto">
+      <h2 class="mb-4 mt-5">Uploaded Posts</h2>
       <?php foreach($posts as $post) : ?>
-        <div class="card mb-3">
+        <div class="card mb-5 mx-auto">
         <?php if(isset($_SESSION['success'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                         <?= $_SESSION['success'] ?>
@@ -12,10 +12,15 @@
                 </div>
                 <?php unset($_SESSION['success']) ?>
             <?php endif;?>
-          <div class="card-body">
+          <?php if($post->image) : ?>
+            <img class="card-img-top" src="<?= '/storage/' . $post->image ?>" alt="<?= $post->title ?>" >
+            <?php endif;?>
+     <a href="/post?id=<?= $post->id ?>" style="text-decoration: none;" class="text-dark">
+     <div class="card-body">
             <div class="d-flex justify-content-between align-items-center">
-              <h5 class="card-title"><?= $post->title ?></h5>
-              <div class="dropdown">
+             <h5 class="card-title"><b><i>Title :</i>
+             </b><?= $post->title ?></h5>
+              <!-- <div class="dropdown">
         <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
             <i class="fa-solid fa-circle-info"></i> Options
         </button>
@@ -23,11 +28,11 @@
             <button class="dropdown-item" onclick="editPost(<?= $post->id ?>)"><i class="fas fa-pencil"></i> Edit</button>
             <button class="dropdown-item" onclick="deletePost(<?= $post->id ?>)"><i class="fas fa-trash"></i> Delete</button>
         </ul>
-        </div>
+        </div> -->
             </div>
-            <p class="card-text"><?= $post->body ?></p>
+           <!-- post body text goes here -->
             <div class="d-flex justify-content-between align-items-center">
-              <small class="text-muted">Category</small>
+        
               <small class="text-muted" id="post-time-<?= $post->id ?>">
                 <?php
                   $post_created_at = new DateTime($post->created_at);
@@ -41,9 +46,20 @@
                 ?>
               </small>
             </div>
+              <!-- specific category -->
+              <?php foreach($categories as $category) : ?>
+            <?php if($category->id==$post->category_id) : ?>
+         <div class="mt-3">
+         <b>Category : </b>
+       <a href="" class="text-decoration-none">  <b><i><small class="text-muted"><?= $category->category_name ?></small></i></b></a>
+         </div>
+        
+              <?php endif;?>
+         <?php endforeach;?>
           </div>
         </div>
-      <?php endforeach ?>
+     </a>
+      <?php endforeach ?> 
     </div>
   </div>
 </div>

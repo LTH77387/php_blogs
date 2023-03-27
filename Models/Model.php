@@ -56,6 +56,7 @@ class Model{
         $statement->execute();
         return $statement->fetchAll(PDO::FETCH_OBJ);
     }
+    // find
     public static function find($id){
         $model= new self();
         $sql="SELECT * FROM " . static::$tableName . " WHERE id=?";
@@ -63,6 +64,15 @@ class Model{
         $statement->execute([$id]);
         return $statement->fetch(PDO::FETCH_OBJ); //fetch because of a single object
     }
+    // paginate
+    public static function paginate($limit){
+        $model= new self();
+        $sql="SELECT * FROM " . static::$tableName . " ORDER BY updated_at DESC LIMIT $limit";
+        $statement=self::$pdo->prepare($sql);
+         $statement->execute();
+         return $statement->fetchAll(PDO::FETCH_OBJ);
+    }
+
     //update 
     public static function update($id, $data)
     {

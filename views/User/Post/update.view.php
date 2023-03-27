@@ -2,7 +2,7 @@
 <!-- Create Post -->
 <div class="container mt-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-8 mt-5">
     <a href="/" class="text-decoration-none text-dark "> <i class="fas fa-arrow-left"></i>Back</a>
     <?php if(isset($_SESSION['updateSuccess'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
