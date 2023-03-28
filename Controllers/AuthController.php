@@ -90,6 +90,7 @@ public function login(){
         $_SESSION['user_id'] = $user->id;
         $_SESSION['email'] = $user->email;
         $_SESSION['user_name']=$user->name;
+        $_SESSION['role']=$user->role;
         return redirect("/");
         exit();
     } else {
@@ -109,10 +110,40 @@ public function logout(){
     }
     return redirect('/');
 }
-
+public function profile($id){
+   $data=User::find($id);
+    view("profile","User","Profile",[
+        "data"=>$data
+    ]);
 
 }
-// }
-// }
+public function profileEdit($id){
+    $data=User::find($id);
+    view("edit","User","Profile",[
+        "data"=>$data
+    ]);
+}
+public function update($id){
+    $errors=[];
+    $name=request("name");
+    $email=request("email");
+   if(empty($name)){
+       $errors['nameError']="Name field is required";
+   }
+   if(empty($email)){
+       $errors['emailError']="Email field is required";
+   }
+   if(!empty($errors)){
+       return back()->with([$errors]);
+   }
+   User::update($id,[
+        "name"=>$name,
+        "email"=>$email
+   ]);
+   return back()->with(["userUpdateSuccess"=>"Updated Successfully!"]);
+}
+
+}
+
 
 ?>

@@ -32,6 +32,9 @@ Route::post('register',[AuthController::class,'store'])->name('register');
 Route::get("login",[AuthController::class,"login_page"]);
 Route::post("login",[AuthController::class,"login"])->name("login");
 Route::get("logout",[AuthController::class,"logout"]);
+Route::get("profile/{id}",[AuthController::class,"profile"]);
+Route::get("profile-edit/{id}",[AuthController::class,"profileEdit"]);
+Route::put("profile-edit",[AuthController::class,"update"])->name("profile-edit");
 
 // for admin 
 Route::get("admin/home",[AdminController::class,"index"]);
@@ -42,4 +45,7 @@ Route::post("category/create",[CategoryController::class,"store"])->name("create
 Route::get("category/update/{id}", [CategoryController::class,"edit"]);
 Route::put("category/update", [CategoryController::class,"update"])->name("category/update"); //route resource 
 Route::get("category/delete/{id}",[CategoryController::class,"delete"]);
+
+//users management in admin page
+Route::get("show-users",[AdminController::class,"show"]);
 ?>

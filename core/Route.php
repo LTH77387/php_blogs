@@ -19,13 +19,14 @@ class Route{
 
     // handle routing for the given URI and HTTP method
     public function direct($uri, $method){
-    // dd($uri . $method);
-        // dd(self::$routes);
+        // if(isset($_SESSION['role'])=="user"){
+        //     dd("yes this is a user");
+        // }
         // if array key does not exist
         if(!array_key_exists($uri, self::$routes[$method])){
             die("404 Not Found");
         }
-        if(isset($_POST['method'])=="PUT"){ //==="PUT"
+        if(isset($_POST['method'])=="PUT"){ //=="PUT"
            $method=$_POST['method']; //put method assigned 
         }
         //test hidden id
@@ -34,11 +35,6 @@ class Route{
        }
       
         $controllerMethod = self::$routes[$method][$uri];
-        // dd($controllerMethod);
-        // if(isset(self::$id)!==null){
-        //     $id=self::$id;
-        //     $this->navigate($controllerMethod[0], $controllerMethod[1],$id);
-        // }
         $this->navigate($controllerMethod[0], $controllerMethod[1]);
     }
 

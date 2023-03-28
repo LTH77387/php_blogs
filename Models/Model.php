@@ -3,6 +3,7 @@ namespace Models;
 
 use App;
 use PDO;
+use PDOException;
 
 class Model{
     protected static $pdo;
